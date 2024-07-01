@@ -6,8 +6,6 @@ import Link from "next/link";
 export default async function Component() {
   const categorys: CategoryList = await getCategorys();
 
-  console.log("categorys ==> ", categorys);
-
   return (
     <section className="w-full h-full">
       <div className="container grid gap-6 md:gap-8 px-4 md:px-6 max-w-6xl mx-auto">
