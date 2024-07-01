@@ -25,6 +25,13 @@ import {
   updateProductCount,
 } from "@/store/product-cart-slice";
 
+const getProductName = (productName: string): string => {
+  const words = productName.split(" ");
+  const maxLength = 3;
+  const shortenedName = words.slice(0, maxLength).join(" ");
+
+  return `${shortenedName}${words.length > maxLength ? "..." : ""}`;
+};
 const Cart = () => {
   const dispatch = useDispatch();
   const { cartProducts, cartProductsIds } = useSelector(
@@ -66,18 +73,18 @@ const Cart = () => {
           <ShoppingCartIcon className="w-5 h-5" />
           <span className="sr-only">Open Cart</span>
           {cartProducts.length > 0 && (
-            <Badge className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-xs text-primary-foreground">
+            <Badge className="absolute -top-2 -right-2 h-4 w-4 p-2 flex items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
               {cartProducts.length}
             </Badge>
           )}
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-[400px] sm:w-[540px]">
+      <SheetContent className="w-[400px] sm:w-[540px] h-screen">
         <SheetHeader>
           <SheetTitle>
             <h2 className="text-lg font-semibold">Cart</h2>
           </SheetTitle>
-          <SheetDescription className="h-screen p-2">
+          <div className="h-screen p-2">
             {cartProducts.length === 0 && (
               <div className="flex-1 flex flex-col items-center justify-center gap-4 min-h-screen">
                 <ShoppingCartIcon className="w-12 h-12 text-muted-foreground" />
@@ -86,7 +93,7 @@ const Cart = () => {
             )}
             {cartProducts.length > 0 && (
               <>
-                <div className="flex-1 overflow-auto h-3/4 ">
+                <div className="flex-1 overflow-auto h-[calc(100vh_-_185px)] no-scrollbar ">
                   <ul className="grid gap-4">
                     {cartProducts.map((product) => {
                       const tempImages = fixImageUrls(product.images);
@@ -113,7 +120,9 @@ const Cart = () => {
                             </Button>
                           </div>
                           <div className="grid gap-1">
-                            <h3 className="font-medium">{product.title}</h3>
+                            <h3 className="font-medium">
+                              {getProductName(product.title)}
+                            </h3>
                             <p className="text-muted-foreground text-sm">
                               {product.category.name}
                             </p>
@@ -122,7 +131,7 @@ const Cart = () => {
                             <p className="font-medium">${product.price}</p>
                             <div className="flex items-center gap-2">
                               <Button
-                                variant="outline"
+                                variant="ghost"
                                 size="icon"
                                 onClick={() =>
                                   handleUpdateCount(product, "dec")
@@ -135,7 +144,7 @@ const Cart = () => {
                               </Button>
                               <span>{product.productCount}</span>
                               <Button
-                                variant="outline"
+                                variant="ghost"
                                 size="icon"
                                 onClick={() =>
                                   handleUpdateCount(product, "inc")
@@ -170,7 +179,7 @@ const Cart = () => {
                 </SheetFooter>
               </>
             )}
-          </SheetDescription>
+          </div>
         </SheetHeader>
       </SheetContent>
     </Sheet>

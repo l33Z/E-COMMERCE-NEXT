@@ -28,7 +28,7 @@ export default function RootLayout({
         >
           <ReduxStoreProvider>
             <Navbar />
-            {children}
+            <main className="min-h-[100vh_-_56px] p-10">{children}</main>
           </ReduxStoreProvider>
         </ThemeProvider>
       </body>
