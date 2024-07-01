@@ -7,6 +7,7 @@ const nextConfig = {
       "placeimg.com",
       "i.imgur.com",
       "mosaic01.ztat.net",
+      "api.escuelajs.co",
       "*",
     ],
   },

@@ -56,7 +56,7 @@ export default async function Component({
       <div className="grid gap-4 md:gap-10 items-start">
         <div className="grid gap-4">
           <Badge variant="secondary" className="w-max">
-            {product.category.name}
+            {product.category?.name}
           </Badge>
           <h1 className="font-bold text-3xl lg:text-4xl">{product.title}</h1>
           <div className="flex items-center gap-2">
@@ -76,7 +76,7 @@ export default async function Component({
           </div>
           <div className="text-4xl font-bold w-full">${product.price}</div>
 
-          <ProductDetailsFooter product={product} />
+          <ProductDetailsFooter product={{ ...product, productCount: 1 }} />
         </div>
       </div>
     </div>

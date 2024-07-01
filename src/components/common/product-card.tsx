@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { StarFilledIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { fixImageUrls } from "@/lib/utils";
+import ProductCardFooterBtn from "./product-card-footer-btn";
 
 type ProductCardProps = {
   product: Product;
@@ -40,7 +41,7 @@ function ProductCard({ product }: ProductCardProps) {
         </p>
         <div className="mt-4 flex items-center justify-between">
           <span className="text-2xl font-bold">${product.price}</span>
-          <Button size="sm">Add to Cart</Button>
+          <ProductCardFooterBtn product={product} />
         </div>
       </div>
     </Card>
